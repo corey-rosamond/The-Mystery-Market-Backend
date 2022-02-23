@@ -1,0 +1,11 @@
+{
+  "short_name": "The Mystery Market",
+  "name": "The Mystery Market: Backend",
+  "icons": [
+
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

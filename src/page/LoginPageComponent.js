@@ -9,7 +9,12 @@ import {
 } from "../redux/userSlice";
 
 const Container = styled.div`
-  background: linear-gradient(45deg,  rgba(66, 183, 245,0.8) 0%,rgba(66, 245, 189,0.4) 100%);
+  background: linear-gradient(
+    45deg,  
+    rgba(66, 183, 245, 0.8) 0%,
+    rgba(66, 245, 189, 0.4) 
+    100%
+  );
   color: rgba(#000000, 0.6);
   font-size: 14px;
   line-height: 1.6em;

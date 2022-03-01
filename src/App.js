@@ -3,7 +3,8 @@ import styled from "styled-components";
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
 import {
   connect
@@ -28,7 +29,8 @@ class App extends React.Component
 {
   render()
   {
-    const isAdmin = this.props.user.currentUser.isAdmin;
+    let isLoggedIn = this.props.user.currentUser;
+    let isAdmin = this.props.user.currentUser.isAdmin;
 
     return (
       <Router>
@@ -36,7 +38,7 @@ class App extends React.Component
           <Route path="/login">
             <LoginPageComponent />
           </Route>
-          {isAdmin && (
+          {isLoggedIn && isAdmin ? (
             <>
               <NavigationComponent />
               <Container>
@@ -46,7 +48,7 @@ class App extends React.Component
                 </Route>
               </Container>
             </>
-          )}
+          ) : (<Redirect to="/login"/>)}
         </Switch>
       </Router>
     );

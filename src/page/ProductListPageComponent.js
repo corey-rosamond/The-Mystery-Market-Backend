@@ -6,7 +6,10 @@ import {
 import {
   getProductsStart,
   getProductsSuccess,
-  getProductsFailure
+  getProductsFailure,
+  deleteProductStart,
+  deleteProductSuccess,
+  deleteProductFailure
 } from "../redux/productSlice";
 
 const Container = styled.div`
@@ -16,6 +19,25 @@ const Container = styled.div`
 
 class ProductListPageComponent extends React.Component
 {
+
+  async getProducts()
+  {
+    try
+    {
+
+
+    } catch (error)
+    {
+      console.log(error);
+      this.props.getProductsFailure();
+    }
+  }
+
+  async deleteProduct()
+  {
+
+  }
+
   render()
   {
     return (
@@ -43,6 +65,9 @@ export default connect(
   {
     getProductsStart,
     getProductsSuccess,
-    getProductsFailure
+    getProductsFailure,
+    deleteProductStart,
+    deleteProductSuccess,
+    deleteProductFailure
   }
 )(ProductListPageComponent);

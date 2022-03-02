@@ -19,10 +19,13 @@ import SidebarComponent from "./component/SidebarComponent";
 import LoginPageComponent from "./page/LoginPageComponent";
 import DashboardPageComponent from "./page/DashboardPageComponent";
 
+import ProductListPageComponent from "./page/ProductListPageComponent";
+import ProductAddPageComponent from "./page/ProductAddPageComponent";
+
+
 
 const Container = styled.div`
   display: flex;
-  margin-top: 10px;
 `;
 
 class App extends React.Component
@@ -46,6 +49,12 @@ class App extends React.Component
                 <SidebarComponent />
                 <Route exact path="/">
                   <DashboardPageComponent/>
+                </Route>
+                <Route path="/product-list">
+                  <ProductListPageComponent/>
+                </Route>
+                <Route path="/product-add">
+                  <ProductAddPageComponent/>
                 </Route>
               </Container>
             </>

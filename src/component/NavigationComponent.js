@@ -13,6 +13,7 @@ const Container = styled.div`
   position: sticky;
   top: 0;
   z-index: 999;
+  border-bottom: 1px solid rgb(251,251,255);
 `;
 
 const Wrapper = styled.div`

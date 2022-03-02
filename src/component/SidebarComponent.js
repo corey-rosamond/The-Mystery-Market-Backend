@@ -92,10 +92,16 @@ class SidebarComponent extends React.Component
                   Users
                 </ListItem>
               </Link>
-              <Link to="/products" className="link">
+              <Link to="/product-list" className="link">
                 <ListItem>
                   <Storefront className="sidebarIcon" />
                   Products
+                </ListItem>
+              </Link>
+              <Link to="/product-add" className="link">
+                <ListItem>
+                  <Storefront className="sidebarIcon" />
+                  Add Product
                 </ListItem>
               </Link>
               <ListItem>

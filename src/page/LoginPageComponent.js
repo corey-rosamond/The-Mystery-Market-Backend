@@ -179,7 +179,19 @@ class LoginPageComponent extends React.Component
           password
         }
       );
-      this.props.loginSuccess(data.data.user);
+      /**
+       * @todo Make this check in the token for isAdmin
+       */
+      if(!data.data.user.is_admin)
+      {
+        this.props.loginFailure();
+        this.setState({
+          error: "You must be an admin to login to this system!"
+        });
+      } else
+      {
+        this.props.loginSuccess(data.data.user);
+      }
     } catch(error)
     {
       this.props.loginFailure();

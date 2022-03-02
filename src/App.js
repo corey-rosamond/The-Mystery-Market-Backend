@@ -29,14 +29,15 @@ class App extends React.Component
 {
   render()
   {
+    // Check if they are logged in
     let isLoggedIn = this.props.user.currentUser;
-    let isAdmin = this.props.user.currentUser.isAdmin;
+    let isAdmin = (!isLoggedIn ? false : this.props.user.currentUser.is_admin);
 
     return (
       <Router>
         <Switch>
           <Route path="/login">
-            <LoginPageComponent />
+            {isLoggedIn && isAdmin ? (<Redirect to="/"/>) : (<LoginPageComponent/>)}
           </Route>
           {isLoggedIn && isAdmin ? (
             <>

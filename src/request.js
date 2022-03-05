@@ -1,5 +1,5 @@
 import axios from "axios";
-import RequestConfiguration from "configuration/requestConfiguration.json";
+import RequestConfiguration from "./configuration/requestConfiguration.json";
 
 const TOKEN = JSON.parse(
   JSON.parse(

@@ -26,6 +26,7 @@ import ProductAddPageComponent from "./page/ProductAddPageComponent";
 
 const Container = styled.div`
   display: flex;
+  height: 100%;
 `;
 
 class App extends React.Component
@@ -40,7 +41,11 @@ class App extends React.Component
       <Router>
         <Switch>
           <Route path="/login">
-            {isLoggedIn && isAdmin ? (<Redirect to="/"/>) : (<LoginPageComponent/>)}
+            {isLoggedIn && isAdmin ? (
+              <Redirect to="/"/>
+            ) : (
+              <LoginPageComponent/>
+            )}
           </Route>
           {isLoggedIn && isAdmin ? (
             <>
@@ -58,7 +63,9 @@ class App extends React.Component
                 </Route>
               </Container>
             </>
-          ) : (<Redirect to="/login"/>)}
+          ) : (
+            <Redirect to="/login"/>
+          )}
         </Switch>
       </Router>
     );

@@ -21,43 +21,68 @@ import {
   deleteProductSuccess,
   deleteProductFailure
 } from "../redux/productSlice";
+import {
+  PublicRequest,
+  UserRequest
+} from "../request";
+import ProductListItemComponent from "../component/ProductListItemComponent";
 
-const Container = styled.div`
-  flex: 7;
-  padding: 10px 20px 10px 20px;
+const Table = styled.table`
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
 `;
 
-const List = styled.div``;
-
-const ListItem = styled.div`
-  display: flex;
-  align-items: center;
+const TR = styled.tr`
+  &:nth-child(even){
+    background-color: #f2f2f2;
+  }
+  &:hover{
+    background-color: #ddd;
+  }
 `;
 
-const Image = styled.img`
-
+const TH = styled.th`
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+  border: 1px solid #ddd;
+  padding: 8px;
 `;
 
-const EditButton = styled.button`
-
+const TD = styled.td`
+  border: 1px solid #ddd;
+  padding: 8px;
 `;
 
-const DeleteButton = styled.button`
-
-`;
 
 class ProductListPageComponent extends React.Component
 {
+
+  constructor(props)
+  {
+    super(props);
+    this.getProducts();
+  }
 
   async getProducts()
   {
     try
     {
-
+      this.props.getProductsStart();
+      let res = await PublicRequest.get("/products/get");
+      if(res.data.success)
+      {
+        this.props.getProductsSuccess(res.data.data);
+      } else
+      {
+        this.props.getProductsFailure();
+      }
 
     } catch (error)
     {
-      console.log(error);
       this.props.getProductsFailure();
     }
   }
@@ -69,58 +94,39 @@ class ProductListPageComponent extends React.Component
 
   render()
   {
-    let products = this.props.product.products;
-    let columns = [
-      { field: "_id", headerName: "ID", width: 220 },
-      {
-        field: "product",
-        headerName: "Product",
-        width: 200,
-        renderCell: (params) => {
-          return (
-            <ListItem>
-              <Image src={params.row.img} alt="" />
-              {params.row.title}
-            </ListItem>
-          );
-        },
-      },
-      { field: "inStock", headerName: "Stock", width: 200 },
-      {
-        field: "price",
-        headerName: "Price",
-        width: 160,
-      },
-      {
-        field: "action",
-        headerName: "Action",
-        width: 150,
-        renderCell: (params) => {
-          return (
-            <>
-              <Link to={"/product/" + params.row._id}>
-                <EditButton>Edit</EditButton>
-              </Link>
-              <DeleteOutline
-              />
-            </>
-          );
-        },
-      },
-    ];
+
     return (
-      <Container>
-        <List>
-          <DataGrid
-            rows={products}
-            disableSelectionOnClick
-            columns={columns}
-            getRowId={(row) => row._id}
-            pageSize={8}
-            checkboxSelection
-          />
-        </List>
-      </Container>
+      <Table>
+        <thead>
+          <TR>
+            <TH>Name</TH>
+            <TH>Name</TH>
+            <TH>Name</TH>
+            <TH>Name</TH>
+            <TH>Name</TH>
+            <TH>Name</TH>
+          </TR>
+        </thead>
+        <tbody>
+        {this.props.product.products.map(function(item){
+          return (
+            <TR
+              key={item._id}
+              style={{cursor: "pointer"}}
+              onClick={() => console.log("Stuff")}
+            >
+              <TD>Stuff</TD>
+            </TR>
+          );
+        })}
+
+        </tbody>
+        <tfoot>
+          <TR>
+
+          </TR>
+        </tfoot>
+      </Table>
     );
   }
 }

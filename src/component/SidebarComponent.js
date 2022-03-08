@@ -73,80 +73,51 @@ class SidebarComponent extends React.Component
                   Home
                 </ListItem>
               </Link>
-              <ListItem>
-                <Timeline className="sidebarIcon" />
-                Analytics
-              </ListItem>
-              <ListItem>
-                <TrendingUp className="sidebarIcon" />
-                Sales
-              </ListItem>
             </List>
           </Menu>
+
           <Menu>
             <Title>Quick Menu</Title>
             <List>
-              <Link to="/users" className="link">
+              <Link to="/user-list" className="link">
                 <ListItem>
                   <PermIdentity className="sidebarIcon" />
                   Users
                 </ListItem>
               </Link>
+
               <Link to="/product-list" className="link">
                 <ListItem>
                   <Storefront className="sidebarIcon" />
                   Products
                 </ListItem>
               </Link>
-              <Link to="/product-add" className="link">
+
+              <Link to="/category-list" className="link">
                 <ListItem>
                   <Storefront className="sidebarIcon" />
-                  Add Product
+                  Categories
                 </ListItem>
               </Link>
-              <ListItem>
-                <AttachMoney className="sidebarIcon" />
-                Transactions
-              </ListItem>
-              <ListItem>
-                <BarChart className="sidebarIcon" />
-                Reports
-              </ListItem>
+
+              <Link to="/transaction-list" className="link">
+                <ListItem>
+                  <AttachMoney className="sidebarIcon" />
+                  Transactions
+                </ListItem>
+              </Link>
+
             </List>
           </Menu>
+
           <Menu>
-            <Title>Notifications</Title>
-            <List>
+            <Title>Temporary</Title>
+            <Link to="/product-add" className="link">
               <ListItem>
-                <MailOutline className="sidebarIcon" />
-                Mail
+                <Storefront className="sidebarIcon" />
+                Add Product
               </ListItem>
-              <ListItem>
-                <DynamicFeed className="sidebarIcon" />
-                Feedback
-              </ListItem>
-              <ListItem>
-                <ChatBubbleOutline className="sidebarIcon" />
-                Messages
-              </ListItem>
-            </List>
-          </Menu>
-          <Menu>
-            <Title>Staff</Title>
-            <List>
-              <ListItem>
-                <WorkOutline className="sidebarIcon" />
-                Manage
-              </ListItem>
-              <ListItem>
-                <Timeline className="sidebarIcon" />
-                Analytics
-              </ListItem>
-              <ListItem>
-                <Report className="sidebarIcon" />
-                Reports
-              </ListItem>
-            </List>
+            </Link>
           </Menu>
         </Wrapper>
       </Container>

@@ -23,6 +23,12 @@ import ProductListPageComponent from "./page/ProductListPageComponent";
 import ProductAddPageComponent from "./page/ProductAddPageComponent";
 
 
+import UserListPageComponent from "./page/UserListPageComponent";
+import UserAddPageComponent from "./page/UserAddPageComponent";
+import UserEditPageComponent from "./page/UserEditPageComponent";
+
+import TransactionListPageComponent from "./page/TransactionListPageComponent";
+import CategoryListPageComponent from "./page/CategoryListPageComponent";
 
 const Container = styled.div`
   display: flex;
@@ -55,9 +61,31 @@ class App extends React.Component
                 <Route exact path="/">
                   <DashboardPageComponent/>
                 </Route>
+
+                <Route path="/user-list">
+                  <UserListPageComponent/>
+                </Route>
+
+                <Route path="/user-add">
+                  <UserAddPageComponent/>
+                </Route>
+
+                <Route path="/user-edit">
+                  <UserEditPageComponent/>
+                </Route>
+
                 <Route path="/product-list">
                   <ProductListPageComponent/>
                 </Route>
+
+                <Route path="/category-list">
+                  <CategoryListPageComponent/>
+                </Route>
+
+                <Route path="/transaction-list">
+                  <TransactionListPageComponent/>
+                </Route>
+
                 <Route path="/product-add">
                   <ProductAddPageComponent/>
                 </Route>

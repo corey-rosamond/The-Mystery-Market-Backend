@@ -13,8 +13,25 @@ const Container = styled.div`
   padding: 10px 20px 10px 20px;
 `;
 
+const Image = styled.img`
+  height: 100px;
+  width:100px;
+  border: 1px solid red;
+  margin: 10px;
+`;
+
+
 class ProductAddPageComponent extends React.Component
 {
+  imageMap = [
+    {photoName: 'photo_1', previewName: "preview_1"},
+    {photoName: 'photo_2', previewName: "preview_2"},
+    {photoName: 'photo_3', previewName: "preview_3"},
+    {photoName: 'photo_4', previewName: "preview_4"},
+    {photoName: 'photo_5', previewName: "preview_5"},
+    {photoName: 'photo_6', previewName: "preview_6"}
+  ];
+
   constructor(props)
   {
     super(props);
@@ -26,16 +43,22 @@ class ProductAddPageComponent extends React.Component
       sell_at: null,
       link: null,
       quantity: 0,
+
       photo_1: null,
       photo_2: null,
       photo_3: null,
       photo_4: null,
       photo_5: null,
-      photo_6: null
+      photo_6: null,
+
+      preview_1: null,
+      preview_2: null,
+      preview_3: null,
+      preview_4: null,
+      preview_5: null,
+      preview_6: null
     };
   }
-
-
 
   onSubmit(event)
   {
@@ -44,45 +67,62 @@ class ProductAddPageComponent extends React.Component
     {
       event.preventDefault();
 
-      let fileName = new Date().getTime() + this.state.photo_1.name;
-      let storage = getStorage(app);
-      let storageRef = ref(storage, fileName);
-      let uploadTask = uploadBytesResumable(storageRef, this.state.photo_1);
 
-      uploadTask.on(
-        "state_changed",
-        (snapshot => {
-          let progress = (
-            snapshot.bytesTransferred / snapshot.totalBytes
-          ) * 100;
-          console.log("Upload is: " + progress + "%");
 
-          switch (snapshot.state)
-          {
-            case "paused":
-              console.log("upload paused");
-              break;
-            case "running":
-              console.log("upload running");
-              break;
-            default:
-              console.log("state is not paused or running");
-          }
-        },
-        (error) => {
-            console.log("UPSY we had an error: " + error);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>{
-            console.log("Do da dang thing");
-          });
+      // This is the image upload portion this should be done after we have a product id
+      this.imageMap.map((targetData) => {
+        let {photoName, previewName} = targetData;
+
+        if(this.state[photoName] !== null)
+        {
+          this.uploadImage(photoName)
         }
-      )
-    );
+      });
+
+
+
     } catch(error)
     {
       console.log(error)
     }
+  }
+
+  uploadImage(targetName)
+  {
+    console.log(targetName)
+
+    let fileName = new Date().getTime() + this.state[targetName].name;
+    let storage = getStorage(app);
+    let storageRef = ref(storage, fileName);
+    let uploadTask = uploadBytesResumable(storageRef, this.state[targetName]);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("Upload is " + progress + "% done");
+        switch (snapshot.state) {
+          case "paused":
+            console.log("Upload is paused");
+            break;
+          case "running":
+            console.log("Upload is running");
+            break;
+          default:
+        }
+      },
+      (error) => {
+        console.log("upload failed")
+      },
+      () => {
+
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          this.setState({
+            preview_1: downloadURL
+          });
+        });
+      }
+    );
   }
 
   onChange(event)
@@ -116,9 +156,14 @@ class ProductAddPageComponent extends React.Component
     {
       event.target.value = "";
     } else {
+      let element = this.imageMap.find(o => o.photoName === event.target.name);
+      let {photoName, previewName} = element;
       this.setState({
-        [event.target.name]: event.target.files[0]
+        [photoName]: event.target.files[0]
       });
+      this.setState({
+        [previewName]: URL.createObjectURL(event.target.files[0])
+      })
     }
   }
 
@@ -209,6 +254,15 @@ class ProductAddPageComponent extends React.Component
           <button type="submit">
             Add Product
           </button>
+          <br />
+
+          <Image src={this.state.preview_1}/>
+          <Image src={this.state.preview_2}/>
+          <Image src={this.state.preview_3}/>
+          <Image src={this.state.preview_4}/>
+          <Image src={this.state.preview_5}/>
+          <Image src={this.state.preview_6}/>
+
         </form>
       </Container>
     );
